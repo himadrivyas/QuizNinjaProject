@@ -24,22 +24,52 @@ const interPolationage = 29;
 const quiz= [['what is Superman\'s real name','Clark Kent'],["What is Wonder Woman's real name?","Diana Prince"],
 ["What is Batman's real name?","Bruce Wayne"]];
 
-let score = 0;
 
-document.querySelector('#quiz').addEventListener('click',takeQuiz,false);
+function start(quiz){
+    let score = 0;
 
-function takeQuiz(){
-    for(const[question,answer] of quiz){
-        const response = prompt(question);
-        //console.log(response,question);
+
+    for(const [question,answer] of quiz){
+        const response = ask(question);
+        check(response,answer);
+    }
+
+    gameOver();
+
+    function ask(question){
+        return prompt(question);
+    }
+
+    function check(response,answer){
         if(response === answer){
-           alert("Correct!");
+            alert('Correct');
             score++;
         }else{
-            alert("Incorrect!");
+            alert(`Wrong! the correct answer was ${answer}`);
         }
     }
-    alert(`You have scored ${score} point${score !==1 ?'s' : ''}`);
+
+    function gameOver(){
+        alert(`Game over, you have scored ${score} point${score !== 1 ? 's': ''}`);
+    }
 }
+
+
+
+document.querySelector('#quiz').addEventListener('click',start,false);
+
+// function takeQuiz(){
+//     for(const[question,answer] of quiz){
+//         const response = prompt(question);
+//         //console.log(response,question);
+//         if(response === answer){
+//            alert("Correct!");
+//             score++;
+//         }else{
+//             alert("Incorrect!");
+//         }
+//     }
+//     alert(`You have scored ${score} point${score !==1 ?'s' : ''}`);
+// }
 
     })();
